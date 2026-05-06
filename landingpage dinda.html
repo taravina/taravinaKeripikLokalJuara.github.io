@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keripik Lokal Juara - Taste of the Best</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(to bottom, #631212, #8B1A1A, #f1890a, #F5E6D3, #ffffff);
+            background-attachment: fixed;
+        }
+        h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
+        
+        nav {
+            background: rgba(99, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(99, 18, 18, 0.8) 0%, rgba(241, 137, 10, 0.8) 100%);
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+        }
+        
+        .text-gold { color: #D4AF37; }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #D4AF37;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: #D4AF37; }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating-img {
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        /* Bintang Rating */
+        .star-input { display: none; }
+        .star-label {
+            font-size: 1.5rem;
+            color: #444;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-label:hover, .star-label:hover ~ .star-label, .star-input:checked ~ .star-label {
+            color: #D4AF37;
+        }
+        .stars-container {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <nav class="text-white py-4 px-8 flex justify-between items-center sticky top-0 z-50 shadow-2xl">
+        <div class="flex gap-6 md:gap-8 text-xs md:text-sm uppercase tracking-widest font-medium">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#menu" class="nav-link">Variant</a>
+            <a href="#rate" class="nav-link">Rate Us</a>
+        </div>
+        
+        <div class="bg-black/20 px-4 py-1.5 rounded-full border border-gold/30 flex items-center gap-2 shadow-inner">
+            <span class="text-[10px] md:text-xs text-gold font-bold uppercase">Visitors:</span>
+            <span id="count" class="text-sm md:text-lg font-serif text-white">0</span>
+            <div class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+        </div>
+    </nav>
+
+    <header class="hero-bg min-h-[90vh] flex flex-col items-center justify-center text-center px-6 py-20 relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-white text-xl md:text-2xl mb-4 italic tracking-wide">Kelezatan Autentik Nusantara</h2>
+            <h1 class="text-6xl md:text-8xl text-white font-bold mb-6 tracking-tighter uppercase drop-shadow-2xl">Keripik Lokal Juara</h1>
+            <p class="text-stone-200 max-w-xl mb-12 mx-auto text-lg md:text-xl font-light">Snack lokal kualitas premium dengan bumbu rempah pilihan.</p>
+            
+            <div class="relative w-full max-w-md mx-auto">
+                <img src="logo keripik.jpeg" alt="Logo" class="floating-img rounded-full border-[15px] border-white/20 shadow-2xl mx-auto w-72 h-72 md:w-96 md:h-96 object-cover">
+            </div>
+        </div>
+    </header>
+
+    <section id="menu" class="py-24 px-6 bg-black/10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <div class="bg-gradient-to-br from-[#8B1A1A] to-[#4d0e0e] text-white p-8 text-center rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 border border-white/10">
+                <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik Pisang Manis</h3>
+                <div class="text-xs mb-4 text-stone-300">Stok Tersisa: <span id="stock-0" class="text-gold font-bold">--</span></div>
+                <div class="relative mb-6 group">
+                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-[#631212] text-[11px] font-black px-4 py-1.5 rounded-full shadow-xl z-10 animate-pulse">
+                        🔥 <span id="sales-0">0</span> Terjual
+                    </div>
+                    <img src="keripik pisang manis.jpeg" class="w-full h-64 object-cover rounded-2xl shadow-inner group-hover:brightness-110 transition">
+                </div>
+                <div class="border-t border-gold/30 pt-6">
+                    <p class="text-gold text-2xl font-bold mb-6 italic">1/2kg Rp 25.000</p>
+                    <p>Renyah, Manis, Pasti Nagih!</p>
+                    <br>
+                    <a id="btn-0" href="https://wa.me/6282132880488?text=Halo,%20saya%20ingin%20pesan%20Keripik%20Pisang%20Manis" onclick="handleOrder(0, event)" target="_blank" class="block bg-white text-[#8B1A1A] py-3 rounded-xl font-black text-sm tracking-widest shadow-lg hover:bg-gold hover:text-white transition-all">PESAN SEKARANG</a>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-[#8B1A1A] to-[#4d0e0e] text-white p-8 text-center rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 border border-white/10">
+                <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik pisang Asin Gurih</h3>
+                <div class="text-xs mb-4 text-stone-300">Stok Tersisa: <span id="stock-1" class="text-gold font-bold">--</span></div>
+                <div class="relative mb-6 group">
+                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-[#631212] text-[11px] font-black px-4 py-1.5 rounded-full shadow-xl z-10 animate-pulse">
+                        ⭐ <span id="sales-1">0</span> Terjual
+                    </div>
+                    <img src="kerpik pisang asin2.jpeg" class="w-full h-64 object-cover rounded-2xl shadow-inner group-hover:brightness-110 transition">
+                </div>
+                <div class="border-t border-gold/30 pt-6">
+                    <p class="text-gold text-2xl font-bold mb-6 italic">1/2kg Rp 25.000</p>
+                    <p>Kriuk Asin, Super Mantap.</p>
+                    <br>
+                    <a id="btn-1" href="https://wa.me/6282132880488?text=Halo,%20saya%20ingin%20pesan%20Keripik%20Pisang%20Asin%20Gurih" onclick="handleOrder(1, event)" target="_blank" class="block bg-white text-[#8B1A1A] py-3 rounded-xl font-black text-sm tracking-widest shadow-lg hover:bg-gold hover:text-white transition-all">PESAN SEKARANG</a>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-[#8B1A1A] to-[#4d0e0e] text-white p-8 text-center rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 border border-white/10">
+                <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik Tempe</h3>
+                <div class="text-xs mb-4 text-stone-300">Stok Tersisa: <span id="stock-2" class="text-gold font-bold">--</span></div>
+                <div class="relative mb-6 group">
+                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-[#631212] text-[11px] font-black px-4 py-1.5 rounded-full shadow-xl z-10 animate-pulse">
+                        🏆 <span id="sales-2">0</span> Terjual
+                    </div>
+                    <img src="keripik tempe2.jpeg" class="w-full h-64 object-cover rounded-2xl shadow-inner group-hover:brightness-110 transition">
+                </div>
+                <div class="border-t border-gold/30 pt-6">
+                    <p class="text-gold text-2xl font-bold mb-6 italic">1/2kg Rp 30.000</p>
+                    <p>Tipis, Garing, Rasa Autentik.</p>
+                    <br>
+                    <a id="btn-2" href="https://wa.me/6282132880488?text=Halo,%20saya%20ingin%20pesan%20Keripik%20Tempe%20Juara" onclick="handleOrder(2, event)" target="_blank" class="block bg-white text-[#8B1A1A] py-3 rounded-xl font-black text-sm tracking-widest shadow-lg hover:bg-gold hover:text-white transition-all">PESAN SEKARANG</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rate" class="py-20 px-6">
+        <div class="max-w-xl mx-auto bg-white p-10 rounded-[2rem] shadow-2xl text-center border-t-8 border-gold">
+            <h2 class="text-3xl font-serif text-[#8B1A1A] mb-2 uppercase">Beri Penilaian</h2>
+            <p class="text-gray-500 mb-6 text-sm">Bagaimana pengalaman kamu menikmati keripik kami?</p>
+            <div class="stars-container mb-4">
+                <input type="radio" name="star" id="star5" class="star-input" value="5" onclick="submitRating(5)"><label for="star5" class="star-label">★</label>
+                <input type="radio" name="star" id="star4" class="star-input" value="4" onclick="submitRating(4)"><label for="star4" class="star-label">★</label>
+                <input type="radio" name="star" id="star3" class="star-input" value="3" onclick="submitRating(3)"><label for="star3" class="star-label">★</label>
+                <input type="radio" name="star" id="star2" class="star-input" value="2" onclick="submitRating(2)"><label for="star2" class="star-label">★</label>
+                <input type="radio" name="star" id="star1" class="star-input" value="1" onclick="submitRating(1)"><label for="star1" class="star-label">★</label>
+            </div>
+            <div id="rating-status" class="text-[#8B1A1A] font-bold text-lg h-8"></div>
+            <div class="mt-6 pt-6 border-t border-gray-100">
+                <div class="text-xs uppercase tracking-widest text-gray-400 mb-1">Rata-rata Rating Saat Ini</div>
+                <div class="text-4xl font-serif text-gold" id="avg-rating">0.0</div>
+                <div class="text-[10px] text-gray-400 mt-1"><span id="total-votes">0</span> Total Suara</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto bg-white/90 backdrop-blur-md p-10 md:p-16 rounded-[3rem] shadow-2xl border border-white/20">
+            <div class="text-center mb-12">
+                <span class="text-gold font-bold tracking-[0.3em] uppercase text-xs">Data Penjualan Terkini</span>
+                <h2 class="text-4xl font-serif text-[#631212] mt-2 uppercase">Grafik Pembeli</h2>
+                <div class="w-24 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="relative h-[300px] md:h-[400px]">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-t from-black to-[#1a1a1a] text-white py-20 px-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
+            <div><h4 class="text-gold font-bold mb-6 uppercase tracking-widest">Alamat</h4><p class="text-gray-400">Yosorati Kerajan Kidul, Jember</p></div>
+            <div><h4 class="text-gold font-bold mb-6 uppercase tracking-widest">Jam Buka</h4><p class="text-gray-400">08:00 - 20:00 WIB</p></div>
+            <div><h4 class="text-gold font-bold mb-6 uppercase tracking-widest">WhatsApp</h4><p class="text-gray-400">0821-3288-0488</p></div>
+            <div><h4 class="text-gold font-bold mb-6 uppercase tracking-widest">Media Sosial</h4><p class="text-gray-400">@keripiklokaljuara</p></div>
+        </div>
+        <div class="text-center mt-20 pt-8 border-t border-white/5 text-[10px] text-stone-500 tracking-[0.3em]">
+            &copy; 2026 KERIPIK LOKAL JUARA.
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA AWAL (Stok & Penjualan) ---
+        // Jika belum ada data di localStorage, gunakan nilai default ini
+        let salesData = JSON.parse(localStorage.getItem('kripikSales')) || [120, 85, 250];
+        let stockData = JSON.parse(localStorage.getItem('kripikStock')) || [50, 40, 30]; // Contoh stok awal
+        let myChart;
+
+        // --- LOGIC ORDER (Tambah Jual & Kurangi Stok) ---
+        function handleOrder(index, event) {
+            if (stockData[index] <= 0) {
+                alert("Maaf, stok produk ini sudah habis!");
+                event.preventDefault();
+                return;
+            }
+            
+            // Update Data
+            salesData[index] += 1;
+            stockData[index] -= 1;
+
+            // Simpan ke LocalStorage
+            localStorage.setItem('kripikSales', JSON.stringify(salesData));
+            localStorage.setItem('kripikStock', JSON.stringify(stockData));
+            
+            updateUI();
+        }
+
+        function updateUI() {
+            salesData.forEach((val, i) => {
+                // Update Angka Terjual
+                const salesEl = document.getElementById(`sales-${i}`);
+                if(salesEl) salesEl.innerText = val;
+
+                // Update Angka Stok
+                const stockEl = document.getElementById(`stock-${i}`);
+                if(stockEl) stockEl.innerText = stockData[i];
+
+                // Update Tombol jika stok habis
+                const btnEl = document.getElementById(`btn-${i}`);
+                if(stockData[i] <= 0) {
+                    btnEl.innerText = "STOK HABIS";
+                    btnEl.classList.remove('bg-white', 'hover:bg-gold');
+                    btnEl.classList.add('bg-gray-500', 'cursor-not-allowed', 'text-stone-300');
+                    btnEl.style.pointerEvents = "none";
+                }
+            });
+
+            if (myChart) {
+                myChart.data.datasets[0].data = salesData;
+                myChart.update();
+            }
+        }
+
+        // --- LOGIC VISITOR & RATING ---
+        function updateVisitor() {
+            let count = localStorage.getItem('visitorCount') || 45;
+            count = parseInt(count) + 1;
+            localStorage.setItem('visitorCount', count);
+            document.getElementById('count').innerText = count;
+        }
+
+        function submitRating(score) {
+            let ratings = JSON.parse(localStorage.getItem('userRatings')) || { sum: 0, count: 0 };
+            ratings.sum += score;
+            ratings.count += 1;
+            localStorage.setItem('userRatings', JSON.stringify(ratings));
+            
+            const status = document.getElementById('rating-status');
+            status.innerText = "Terima kasih atas " + score + " bintangnya! ⭐";
+            displayRating();
+        }
+
+        function displayRating() {
+            let ratings = JSON.parse(localStorage.getItem('userRatings')) || { sum: 0, count: 0 };
+            const avg = ratings.count > 0 ? (ratings.sum / ratings.count).toFixed(1) : "0.0";
+            document.getElementById('avg-rating').innerText = avg;
+            document.getElementById('total-votes').innerText = ratings.count;
+        }
+
+        // --- GRAFIK ---
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Pisang Manis', 'Pisang Asin', 'Keripik Tempe'],
+                datasets: [{
+                    label: 'Jumlah Pembeli',
+                    data: salesData,
+                    backgroundColor: ['#D4AF37', '#f1890a', '#8B1A1A'],
+                    borderRadius: 10,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { 
+                    y: { beginAtZero: true, ticks: { color: '#631212' } },
+                    x: { ticks: { color: '#631212', font: { weight: 'bold' } } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        window.onload = () => {
+            updateVisitor();
+            updateUI();
+            displayRating();
+        };
+    </script>
+</body>
+</html>
