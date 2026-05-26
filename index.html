@@ -53,26 +53,13 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-        .floating-img {
-            animation: floating 5s ease-in-out infinite;
-        }
+        .floating-img { animation: floating 5s ease-in-out infinite; }
 
-        /* Bintang Rating */
-        .star-input { display: none; }
-        .star-label {
-            font-size: 1.5rem;
-            color: #444;
-            cursor: pointer;
-            transition: color 0.2s;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .star-label:hover, .star-label:hover ~ .star-label, .star-input:checked ~ .star-label {
-            color: #D4AF37;
-        }
-        .stars-container {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-        }
+        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
     </style>
 </head>
 <body class="text-stone-800">
@@ -81,7 +68,7 @@
         <div class="flex gap-6 md:gap-8 text-xs md:text-sm uppercase tracking-widest font-medium">
             <a href="#" class="nav-link">Home</a>
             <a href="#menu" class="nav-link">Variant</a>
-            <a href="#rate" class="nav-link">Rate Us</a>
+            <a href="#saran" class="nav-link">suggestion Box</a>
         </div>
         
         <div class="bg-black/20 px-4 py-1.5 rounded-full border border-gold/30 flex items-center gap-2 shadow-inner">
@@ -106,6 +93,7 @@
     <section id="menu" class="py-24 px-6 bg-black/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
             
+            <!-- CARD 1: Keripik Pisang Manis -->
             <div class="bg-gradient-to-br from-[#8B1A1A] to-[#4d0e0e] text-white p-8 text-center rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 border border-white/10">
                 <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik Pisang Manis</h3>
                 <div class="text-xs mb-4 text-stone-300">Stok Tersisa: <span id="stock-0" class="text-gold font-bold">--</span></div>
@@ -118,13 +106,26 @@
                 <div class="border-t border-gold/30 pt-6">
                     <p class="text-gold text-2xl font-bold mb-6 italic">1/2kg Rp 25.000</p>
                     <p>Renyah, Manis, Pasti Nagih!</p>
+                    <div class="mt-4">
+                        <div class="flex justify-center gap-1 text-2xl cursor-pointer">
+                            <span onclick="rateProduct(0,1)">⭐</span>
+                            <span onclick="rateProduct(0,2)">⭐</span>
+                            <span onclick="rateProduct(0,3)">⭐</span>
+                            <span onclick="rateProduct(0,4)">⭐</span>
+                            <span onclick="rateProduct(0,5)">⭐</span>
+                        </div>
+                        <p class="text-sm text-stone-200 mt-2">
+                            Rating: <span id="avg-product-0">0.0</span>/5 • <span id="votes-product-0">0</span> ulasan
+                        </p>
+                    </div>
                     <br>
                     <a id="btn-0" href="https://wa.me/6282132880488?text=Halo,%20saya%20ingin%20pesan%20Keripik%20Pisang%20Manis" onclick="handleOrder(0, event)" target="_blank" class="block bg-white text-[#8B1A1A] py-3 rounded-xl font-black text-sm tracking-widest shadow-lg hover:bg-gold hover:text-white transition-all">PESAN SEKARANG</a>
                 </div>
             </div>
 
+            <!-- CARD 2: Keripik Pisang Asin Gurih -->
             <div class="bg-gradient-to-br from-[#8B1A1A] to-[#4d0e0e] text-white p-8 text-center rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 border border-white/10">
-                <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik pisang Asin Gurih</h3>
+                <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik Pisang Asin Gurih</h3>
                 <div class="text-xs mb-4 text-stone-300">Stok Tersisa: <span id="stock-1" class="text-gold font-bold">--</span></div>
                 <div class="relative mb-6 group">
                     <div class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-[#631212] text-[11px] font-black px-4 py-1.5 rounded-full shadow-xl z-10 animate-pulse">
@@ -135,23 +136,48 @@
                 <div class="border-t border-gold/30 pt-6">
                     <p class="text-gold text-2xl font-bold mb-6 italic">1/2kg Rp 25.000</p>
                     <p>Kriuk Asin, dan Super Mantap.</p>
+                    <div class="mt-4">
+                        <div class="flex justify-center gap-1 text-2xl cursor-pointer">
+                            <span onclick="rateProduct(1,1)">⭐</span>
+                            <span onclick="rateProduct(1,2)">⭐</span>
+                            <span onclick="rateProduct(1,3)">⭐</span>
+                            <span onclick="rateProduct(1,4)">⭐</span>
+                            <span onclick="rateProduct(1,5)">⭐</span>
+                        </div>
+                        <p class="text-sm text-stone-200 mt-2">
+                            Rating: <span id="avg-product-1">0.0</span>/5 • <span id="votes-product-1">0</span> ulasan
+                        </p>
+                    </div>
                     <br>
                     <a id="btn-1" href="https://wa.me/6282132880488?text=Halo,%20saya%20ingin%20pesan%20Keripik%20Pisang%20Asin%20Gurih" onclick="handleOrder(1, event)" target="_blank" class="block bg-white text-[#8B1A1A] py-3 rounded-xl font-black text-sm tracking-widest shadow-lg hover:bg-gold hover:text-white transition-all">PESAN SEKARANG</a>
                 </div>
             </div>
 
+            <!-- CARD 3: Keripik Tempe -->
             <div class="bg-gradient-to-br from-[#8B1A1A] to-[#4d0e0e] text-white p-8 text-center rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 border border-white/10">
                 <h3 class="text-2xl font-serif mb-2 h-10 flex items-center justify-center uppercase">Keripik Tempe</h3>
                 <div class="text-xs mb-4 text-stone-300">Stok Tersisa: <span id="stock-2" class="text-gold font-bold">--</span></div>
                 <div class="relative mb-6 group">
                     <div class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-[#631212] text-[11px] font-black px-4 py-1.5 rounded-full shadow-xl z-10 animate-pulse">
-                        🏆 <span id="sales-2">0</span> Terjual
+                         <span id="sales-2">0</span> Terjual
                     </div>
                     <img src="keripik tempe2.jpeg" class="w-full h-64 object-cover rounded-2xl shadow-inner group-hover:brightness-110 transition">
                 </div>
                 <div class="border-t border-gold/30 pt-6">
                     <p class="text-gold text-2xl font-bold mb-6 italic">1/2kg Rp 30.000</p>
                     <p>Tipis, Garing, Rasa Autentik.</p>
+                    <div class="mt-4">
+                        <div class="flex justify-center gap-1 text-2xl cursor-pointer">
+                            <span onclick="rateProduct(2,1)">⭐</span>
+                            <span onclick="rateProduct(2,2)">⭐</span>
+                            <span onclick="rateProduct(2,3)">⭐</span>
+                            <span onclick="rateProduct(2,4)">⭐</span>
+                            <span onclick="rateProduct(2,5)">⭐</span>
+                        </div>
+                        <p class="text-sm text-stone-200 mt-2">
+                            Rating: <span id="avg-product-2">0.0</span>/5 • <span id="votes-product-2">0</span> ulasan
+                        </p>
+                    </div>
                     <br>
                     <a id="btn-2" href="https://wa.me/6282132880488?text=Halo,%20saya%20ingin%20pesan%20Keripik%20Tempe%20Juara" onclick="handleOrder(2, event)" target="_blank" class="block bg-white text-[#8B1A1A] py-3 rounded-xl font-black text-sm tracking-widest shadow-lg hover:bg-gold hover:text-white transition-all">PESAN SEKARANG</a>
                 </div>
@@ -159,25 +185,78 @@
         </div>
     </section>
 
-    <section id="rate" class="py-20 px-6">
-        <div class="max-w-xl mx-auto bg-white p-10 rounded-[2rem] shadow-2xl text-center border-t-8 border-gold">
-            <h2 class="text-3xl font-serif text-[#8B1A1A] mb-2 uppercase">Beri Penilaian</h2>
-            <p class="text-gray-500 mb-6 text-sm">Bagaimana pengalaman kamu menikmati keripik kami?</p>
-            <div class="stars-container mb-4">
-                <input type="radio" name="star" id="star5" class="star-input" value="5" onclick="submitRating(5)"><label for="star5" class="star-label">★</label>
-                <input type="radio" name="star" id="star4" class="star-input" value="4" onclick="submitRating(4)"><label for="star4" class="star-label">★</label>
-                <input type="radio" name="star" id="star3" class="star-input" value="3" onclick="submitRating(3)"><label for="star3" class="star-label">★</label>
-                <input type="radio" name="star" id="star2" class="star-input" value="2" onclick="submitRating(2)"><label for="star2" class="star-label">★</label>
-                <input type="radio" name="star" id="star1" class="star-input" value="1" onclick="submitRating(1)"><label for="star1" class="star-label">★</label>
+    <!-- ✨ KOTAK SARAN ✨ -->
+    <section id="saran" class="py-20 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-gold font-bold tracking-[0.3em] uppercase text-xs">Suara Pelanggan</span>
+                <h2 class="text-4xl font-serif text-[#631212] mt-2 uppercase">Kotak Saran & Ulasan</h2>
+                <div class="w-24 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+                <p class="text-stone-600 mt-4">Punya masukan, kritik, atau ide varian baru? Kami siap mendengarkan! </p>
             </div>
-            <div id="rating-status" class="text-[#8B1A1A] font-bold text-lg h-8"></div>
-            <div class="mt-6 pt-6 border-t border-gray-100">
-                <div class="text-xs uppercase tracking-widest text-gray-400 mb-1">Rata-rata Rating Saat Ini</div>
-                <div class="text-4xl font-serif text-gold" id="avg-rating">0.0</div>
-                <div class="text-[10px] text-gray-400 mt-1"><span id="total-votes">0</span> Total Suara</div>
+            
+            <div class="bg-white/95 backdrop-blur-md p-8 md:p-10 rounded-[2rem] shadow-2xl border border-white/30 animate-slide-up mb-12">
+                <form id="suggestionForm" onsubmit="submitSuggestion(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-[#631212] mb-2">Nama Kamu *</label>
+                        <input type="text" id="saranNama" required 
+                            class="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-[#8B1A1A] focus:outline-none transition bg-white/80"
+                            placeholder="Contoh: Budi Santoso">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#631212] mb-2">WhatsApp (Opsional)</label>
+                        <input type="tel" id="saranWa" 
+                            class="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-[#8B1A1A] focus:outline-none transition bg-white/80"
+                            placeholder="Contoh: 0812xxxxxxx">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#631212] mb-2">Saran / Pesan Kamu *</label>
+                        <textarea id="saranPesan" required rows="4"
+                            class="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-[#8B1A1A] focus:outline-none transition bg-white/80 resize-none"
+                            placeholder="Tulis saranmu di sini..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#631212] mb-2">Rating Pengalaman Belanja</label>
+                        <div class="flex justify-center gap-2 text-3xl">
+                            <span onclick="setSaranRating(1)" id="saran-star-1" class="cursor-pointer hover:scale-110 transition">⭐</span>
+                            <span onclick="setSaranRating(2)" id="saran-star-2" class="cursor-pointer hover:scale-110 transition">⭐</span>
+                            <span onclick="setSaranRating(3)" id="saran-star-3" class="cursor-pointer hover:scale-110 transition">⭐</span>
+                            <span onclick="setSaranRating(4)" id="saran-star-4" class="cursor-pointer hover:scale-110 transition">⭐</span>
+                            <span onclick="setSaranRating(5)" id="saran-star-5" class="cursor-pointer hover:scale-110 transition">⭐</span>
+                        </div>
+                        <input type="hidden" id="saranRating" value="0">
+                        <p id="saranRatingText" class="text-center text-sm text-stone-500 mt-2">Klik bintang untuk memberi rating</p>
+                    </div>
+                    
+                    <button type="submit" 
+                        class="w-full bg-gradient-to-r from-[#8B1A1A] to-[#631212] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:from-[#631212] hover:to-[#4d0e0e] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <span>📮</span> Kirim Saran
+                    </button>
+                </form>
+                
+                <div id="saranSuccess" class="hidden text-center py-8 animate-slide-up">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h3 class="text-2xl font-serif text-[#8B1A1A] font-bold mb-2">Terima Kasih!</h3>
+                    <p class="text-stone-600">Saran kamu sudah kami terima dan langsung ditampilkan di bawah. Setiap masukan sangat berarti! ✨</p>
+                    <button onclick="resetSaranForm()" class="mt-6 text-[#8B1A1A] font-semibold hover:underline">Kirim Saran Lagi</button>
+                </div>
+            </div>
+
+            <!-- ✨ TAMPILAN SARAN YANG SUDAH DIKIRIM ✨ -->
+            <div id="suggestions-display" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Ulasan akan muncul di sini secara otomatis -->
             </div>
         </div>
     </section>
+
+    <!-- 
+    <section id="rate" class="py-20 px-6">
+        ... (Bagian ini di-comment sesuai permintaan) ...
+    </section> 
+    -->
 
     <section class="py-20 px-6">
         <div class="max-w-4xl mx-auto bg-white/90 backdrop-blur-md p-10 md:p-16 rounded-[3rem] shadow-2xl border border-white/20">
@@ -205,42 +284,31 @@
     </footer>
 
     <script>
-        // --- DATA AWAL (Stok & Penjualan) ---
-        // Jika belum ada data di localStorage, gunakan nilai default ini
+        // --- DATA AWAL ---
         let salesData = JSON.parse(localStorage.getItem('kripikSales')) || [120, 85, 250];
-        let stockData = JSON.parse(localStorage.getItem('kripikStock')) || [50, 40, 30]; // Contoh stok awal
+        let stockData = JSON.parse(localStorage.getItem('kripikStock')) || [50, 40, 30];
         let myChart;
 
-        // --- LOGIC ORDER (Tambah Jual & Kurangi Stok) ---
+        // --- LOGIC ORDER ---
         function handleOrder(index, event) {
             if (stockData[index] <= 0) {
                 alert("Maaf, stok produk ini sudah habis!");
                 event.preventDefault();
                 return;
             }
-            
-            // Update Data
             salesData[index] += 1;
             stockData[index] -= 1;
-
-            // Simpan ke LocalStorage
             localStorage.setItem('kripikSales', JSON.stringify(salesData));
             localStorage.setItem('kripikStock', JSON.stringify(stockData));
-            
             updateUI();
         }
 
         function updateUI() {
             salesData.forEach((val, i) => {
-                // Update Angka Terjual
                 const salesEl = document.getElementById(`sales-${i}`);
                 if(salesEl) salesEl.innerText = val;
-
-                // Update Angka Stok
                 const stockEl = document.getElementById(`stock-${i}`);
                 if(stockEl) stockEl.innerText = stockData[i];
-
-                // Update Tombol jika stok habis
                 const btnEl = document.getElementById(`btn-${i}`);
                 if(stockData[i] <= 0) {
                     btnEl.innerText = "STOK HABIS";
@@ -249,14 +317,13 @@
                     btnEl.style.pointerEvents = "none";
                 }
             });
-
             if (myChart) {
                 myChart.data.datasets[0].data = salesData;
                 myChart.update();
             }
         }
 
-        // --- LOGIC VISITOR & RATING ---
+        // --- VISITOR ---
         function updateVisitor() {
             let count = localStorage.getItem('visitorCount') || 45;
             count = parseInt(count) + 1;
@@ -264,22 +331,112 @@
             document.getElementById('count').innerText = count;
         }
 
-        function submitRating(score) {
-            let ratings = JSON.parse(localStorage.getItem('userRatings')) || { sum: 0, count: 0 };
-            ratings.sum += score;
-            ratings.count += 1;
-            localStorage.setItem('userRatings', JSON.stringify(ratings));
-            
-            const status = document.getElementById('rating-status');
-            status.innerText = "Terima kasih atas " + score + " bintangnya! ⭐";
-            displayRating();
+        // --- RATING PRODUK ---
+        let productRatings = JSON.parse(localStorage.getItem('productRatings')) || [
+            { sum: 0, count: 0 }, { sum: 0, count: 0 }, { sum: 0, count: 0 }
+        ];
+
+        function rateProduct(productIndex, score) {
+            productRatings[productIndex].sum += score;
+            productRatings[productIndex].count += 1;
+            localStorage.setItem('productRatings', JSON.stringify(productRatings));
+            displayProductRatings();
         }
 
-        function displayRating() {
-            let ratings = JSON.parse(localStorage.getItem('userRatings')) || { sum: 0, count: 0 };
-            const avg = ratings.count > 0 ? (ratings.sum / ratings.count).toFixed(1) : "0.0";
-            document.getElementById('avg-rating').innerText = avg;
-            document.getElementById('total-votes').innerText = ratings.count;
+        function displayProductRatings() {
+            productRatings.forEach((product, index) => {
+                let avg = product.count > 0 ? (product.sum / product.count).toFixed(1) : "0.0";
+                document.getElementById(`avg-product-${index}`).innerText = avg;
+                document.getElementById(`votes-product-${index}`).innerText = product.count;
+            });
+        }
+
+        // ✨ LOGIC KOTAK SARAN & TAMPILAN 
+        function setSaranRating(score) {
+            document.getElementById('saranRating').value = score;
+            for(let i = 1; i <= 5; i++) {
+                const star = document.getElementById(`saran-star-${i}`);
+                star.innerHTML = i <= score ? '⭐' : '☆';
+                star.classList.toggle('scale-110', i <= score);
+            }
+            const texts = ['', 'Kurang Puas 😕', 'Cukup Baik 👍', 'Bagus! ', 'Sangat Bagus! 🎉', 'Luar Biasa! 🏆'];
+            document.getElementById('saranRatingText').innerText = texts[score];
+            document.getElementById('saranRatingText').className = `text-center text-sm mt-2 ${score >= 4 ? 'text-green-600 font-semibold' : score >= 3 ? 'text-stone-600' : 'text-orange-500'}`;
+        }
+
+        function submitSuggestion(event) {
+            event.preventDefault();
+            
+            const nama = document.getElementById('saranNama').value.trim();
+            const wa = document.getElementById('saranWa').value.trim();
+            const pesan = document.getElementById('saranPesan').value.trim();
+            const rating = parseInt(document.getElementById('saranRating').value) || 5;
+            
+            const suggestions = JSON.parse(localStorage.getItem('suggestions')) || [];
+            suggestions.push({
+                nama, wa, pesan, rating,
+                tanggal: new Date().toLocaleString('id-ID')
+            });
+            localStorage.setItem('suggestions', JSON.stringify(suggestions));
+            
+            displaySuggestions(); // Tampilkan langsung
+            document.getElementById('suggestionForm').classList.add('hidden');
+            document.getElementById('saranSuccess').classList.remove('hidden');
+        }
+
+        function displaySuggestions() {
+            const container = document.getElementById('suggestions-display');
+            const suggestions = JSON.parse(localStorage.getItem('suggestions')) || [];
+            container.innerHTML = '';
+
+            if (suggestions.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white/60 rounded-2xl border border-dashed border-stone-300">
+                        <p class="text-stone-500 text-lg">Belum ada saran atau ulasan. Jadilah yang pertama! ✨</p>
+                    </div>`;
+                return;
+            }
+
+            // Urutkan dari terbaru
+            const reversed = [...suggestions].reverse();
+
+            reversed.forEach(item => {
+                const stars = '⭐'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+                const card = `
+                    <div class="bg-white/90 backdrop-blur p-6 rounded-2xl shadow-lg border border-gold/10 animate-slide-up hover:shadow-xl transition duration-300">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-[#631212] text-lg">${escapeHtml(item.nama)}</h4>
+                                <p class="text-xs text-stone-400 flex items-center gap-1">📅 ${item.tanggal}</p>
+                            </div>
+                            <div class="text-lg tracking-wider">${stars}</div>
+                        </div>
+                        <p class="text-stone-600 italic leading-relaxed border-l-2 border-gold/30 pl-3">"${escapeHtml(item.pesan)}"</p>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function resetSaranForm() {
+            document.getElementById('suggestionForm').reset();
+            document.getElementById('saranRating').value = '0';
+            document.getElementById('saranRatingText').innerText = 'Klik bintang untuk memberi rating';
+            document.getElementById('saranRatingText').className = 'text-center text-sm text-stone-500 mt-2';
+            for(let i = 1; i <= 5; i++) {
+                const star = document.getElementById(`saran-star-${i}`);
+                star.innerHTML = '⭐';
+                star.classList.remove('scale-110');
+            }
+            document.getElementById('saranSuccess').classList.add('hidden');
+            document.getElementById('suggestionForm').classList.remove('hidden');
+        }
+
+        // Keamanan XSS sederhana
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // --- GRAFIK ---
@@ -290,7 +447,7 @@
                 labels: ['Pisang Manis', 'Pisang Asin', 'Keripik Tempe'],
                 datasets: [{
                     label: 'Jumlah Pembeli',
-                    data: salesData,
+                     salesData,
                     backgroundColor: ['#D4AF37', '#f1890a', '#8B1A1A'],
                     borderRadius: 10,
                 }]
@@ -309,7 +466,8 @@
         window.onload = () => {
             updateVisitor();
             updateUI();
-            displayRating();
+            displayProductRatings();
+            displaySuggestions(); // Load saran saat halaman dibuka
         };
     </script>
 </body>
